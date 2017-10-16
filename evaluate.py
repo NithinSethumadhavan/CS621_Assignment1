@@ -110,7 +110,7 @@ def print_line(prefix, n):
 
 def parse_term(term):
     stack = []
-    symbols = ['+', '*', 's', 'E', 'fact']
+    symbols = ['+', '*', 's', 'E', 'f']
     variables = ['u', 'v', 'w', 'x', 'y', 'z']
     constants = ['0', 'T', 'F']
     for c in term:
