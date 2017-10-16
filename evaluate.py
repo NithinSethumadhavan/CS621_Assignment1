@@ -1,3 +1,6 @@
+# Submitted by Abhijeet Dubey and Nithin S  for CS 621: Artificial Intelligence Assignment 1 (October 2017)
+#
+
 import sys
 
 """
@@ -107,7 +110,7 @@ def print_line(prefix, n):
 
 def parse_term(term):
     stack = []
-    symbols = ['+', '*', 's', 'E']
+    symbols = ['+', '*', 's', 'E', 'fact']
     variables = ['u', 'v', 'w', 'x', 'y', 'z']
     constants = ['0', 'T', 'F']
     for c in term:

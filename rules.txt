@@ -3,4 +3,4 @@
 *(0,x) -> 0
 *(s(x),y) -> +(y,*(x,y))
 fact(0) -> s(0)
-fact(s(x)) -> *(s(x),fact(x)) 
+fact(s(x)) -> *(s(x),fact(x))
