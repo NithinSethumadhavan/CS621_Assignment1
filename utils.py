@@ -1,26 +1,6 @@
+from Rule import Rule
+
 substitutions={}
-
-def get_middle(string):
-	count=0
-	pos=-1
-	for i in range(0,len(string)):
-		each=string[i]
-		if (each=='('):
-			count+=1
-		elif (each==')'):
-			count-=1
-			if (count<1):
-				break
-		elif (each==',' and count==1):
-			pos=i
-	if (count==0 and pos!=-1):
-		return (pos+1,i+1)
-	else:
-		print ("Invalid Rule: Paranthesis mismatch. Exiting")
-		sys.exit(0)
-
-
-
 
 def match_terms(lhs,term):
 	global substitutions
