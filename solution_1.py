@@ -73,31 +73,32 @@ def replace(rule):
 	return rule
 
 
-def compare_replace(left_rule,right_rule,input_rule):
+def compare_replace(lhs,rhs,term):
 	global changes
 	#print ("Compare and replace",left_rule.string,right_rule.string,input_rule.string)
 	changes.clear()
-	if compare_tree(left_rule,input_rule):
-		input_rule=Rule(right_rule.string)
-		input_rule=replace(input_rule)
-		return (1,input_rule)
-	if input_rule.object_type=='ufun':
-		result=compare_replace(left_rule,right_rule,input_rule.parameter_1)
-		if (result[0]):
-			input_rule.parameter_1=result[1]
-			input_rule.string=input_rule.function_type+"("+result[1].string+")"
-			return (1,input_rule)
-	if input_rule.object_type=='bfun':
-		result1=compare_replace(left_rule,right_rule,input_rule.parameter_1)
-		if (result1[0]):
-			input_rule.parameter_1=result1[1]
-		result2=compare_replace(left_rule,right_rule,input_rule.parameter_2)
-		if (result2[0]):
-			input_rule.parameter_2=result2[1]
-		if (result1[0] or result2[0]):
-			input_rule.string=input_rule.function_type+"("+input_rule.parameter_1.string+","+input_rule.parameter_2.string+")"
-			return (1,input_rule)
-	return (0,input_rule)
+	if compare_tree(lhs,term):
+		term = Rule(rhs.string)
+		term = replace(term)
+		return True,term
+	if term.object_type=='bfun':
+		status1,result1 = compare_replace(lhs,rhs,term.parameter_1)
+		if (status1):
+			term.parameter_1 = result1
+		status2,result2 = compare_replace(lhs,rhs,term.parameter_2)
+		if (status2):
+			term.parameter_2 = result2
+		if (status1 or status2):
+			term.string=term.function_type + "(" + term.parameter_1.string + "," + term.parameter_2.string +")"
+			return True,term
+	if term.object_type=='ufun':
+		status,result=compare_replace(lhs,rhs,term.parameter_1)
+		if (status == True):
+			term.parameter_1=result
+			term.string=term.function_type+"("+result.string+")"
+			return True,term
+
+	return False,term
 
 
 # def parse_tree(rules_objects,input_rule):
