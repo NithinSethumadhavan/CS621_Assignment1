@@ -86,7 +86,6 @@ def read_rules():
 	for each in rules:
 		each=each.replace("\n","")
 		each=each.replace(" ","")
-		print(each)
 		if (each):
 			rule_object=Rule(each)
 			rules_objects.append(rule_object)
