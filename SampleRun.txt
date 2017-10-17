@@ -1,0 +1,8 @@
+Script started on Tue Oct 17 12:49:03 2017
+[?1034h[36mNithin[m@[32mNithins-MacBook-Pro:[33;1m~/Academics/Workspace/git/CS621_Assignment1[m$ python3 main.py 
+Enter Term: *(fact(s(s(0))),*(s(s(0)),s(s(0))))
+Evaluated Solution: s(s(s(s(s(s(s(s(0))))))))
+[36mNithin[m@[32mNithins-MacBook-Pro:[33;1m~/Academics/Workspace/git/CS621_Assignment1[m$ exit
+exit
+
+Script done on Tue Oct 17 12:49:38 2017
