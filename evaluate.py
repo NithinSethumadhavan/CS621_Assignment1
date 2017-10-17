@@ -1,7 +1,7 @@
 rules=[]
 constants = ['a','b','c','0']
 variables = ['u','v','x','y','z']
-functions = ['S','+','*','f']
+functions = ['S','+','*','fact']
 
 def parserule(rule):
     hs = rule.split(" -> ")  # lhs and rhs
