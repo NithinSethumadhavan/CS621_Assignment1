@@ -8,7 +8,7 @@ variables=['x','y','z','u',]
 constants=['0','a','b','c','d',]
 binary_functions=['+','*',]
 unary_functions=['s','fact',]
-changes={}
+substitutions={}
 
 # Method defined in Part 0
 def get_middle(string):
@@ -35,7 +35,7 @@ def get_middle(string):
 
 def match_terms(lhs,term):
 	#print ("Compare ",left_rule.string,input_rule.string)
-	global changes
+	global substitutions
 	if lhs.object_type=='ufun' and term.object_type=='ufun':
 		if lhs.function_type==term.function_type:
 			return match_terms(lhs.parameter_1,term.parameter_1)
@@ -47,19 +47,19 @@ def match_terms(lhs,term):
 		if lhs.string==term.string:
 			return 1
 	elif lhs.object_type=='var' and term.object_type!='var':
-		if lhs.string in changes.keys():
-			if changes[lhs.string]!=term.string:
+		if lhs.string in substitutions.keys():
+			if substitutions[lhs.string]!=term.string:
 				return 0
 		else:
-			changes[lhs.string]=term.string
+			substitutions[lhs.string]=term.string
 		return 1
 	return 0
 
 def replace(rule):
-	global changes
+	global substitutions
 	if rule.object_type=='var':
-		if rule.string in changes.keys():
-			return Rule(changes[rule.string])
+		if rule.string in substitutions.keys():
+			return Rule(substitutions[rule.string])
 	elif rule.object_type=='ufun':
 		rule.parameter_1=replace(rule.parameter_1)
 		rule.parameter_2=""
@@ -74,9 +74,9 @@ def replace(rule):
 
 
 def substitute(lhs,rhs,term):
-	global changes
+	global substitutions
 	#print ("Compare and replace",left_rule.string,right_rule.string,input_rule.string)
-	changes.clear()
+	substitutions.clear()
 	if match_terms(lhs,term):
 		term = Rule(rhs.string)
 		term = replace(term)
