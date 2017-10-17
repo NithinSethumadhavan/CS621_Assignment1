@@ -55,7 +55,7 @@ class Rule:
 				self.parameter_1=Rule(rule[first_par+1:split_index[0]])
 				self.parameter_2=Rule(rule[split_index[0]+1:split_index[1]])
 			except Exception as error:
-				print ("Error: ",error)
+				print ("Error in parsing binary function: ",error)
 				sys.exit()
 		elif name in unary_functions:
 			self.object_type='ufun'
@@ -67,10 +67,10 @@ class Rule:
 				self.parameter_1=Rule(rule[first_par+1:-1])
 				self.parameter_2=""
 			except Exception  as error:
-				print ("Error: ",error)
+				print ("Error in parsing unary function: ",error)
 				sys.exit()
 		else:
-			print ("Error: '"+name+"' not found")
+			print ("Please add'" + name + "'to list of function symbols/variables.")
 			sys.exit(0)
 	def __init__(self,string):
 		self.string=string
