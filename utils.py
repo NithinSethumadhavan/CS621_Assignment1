@@ -94,4 +94,4 @@ def read_rules():
 	input_rule=input("Enter Term: ")
 	input_rule_object=Rule(input_rule)
 	result_rule=evaluate(rules_objects,input_rule_object)
-	print ("Result: ",result_rule.string)
+	print ("Evaluated Solution:",result_rule.string)
