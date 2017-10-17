@@ -73,26 +73,26 @@ def replace(rule):
 	return rule
 
 
-def compare_replace(lhs,rhs,term):
+def substitute(lhs,rhs,term):
 	global changes
 	#print ("Compare and replace",left_rule.string,right_rule.string,input_rule.string)
 	changes.clear()
-	if compare_tree(lhs,term):
+	if match_terms(lhs,term):
 		term = Rule(rhs.string)
 		term = replace(term)
 		return True,term
 	if term.object_type=='bfun':
-		status1,result1 = compare_replace(lhs,rhs,term.parameter_1)
+		status1,result1 = substitute(lhs,rhs,term.parameter_1)
 		if (status1):
 			term.parameter_1 = result1
-		status2,result2 = compare_replace(lhs,rhs,term.parameter_2)
+		status2,result2 = substitute(lhs,rhs,term.parameter_2)
 		if (status2):
 			term.parameter_2 = result2
 		if (status1 or status2):
 			term.string=term.function_type + "(" + term.parameter_1.string + "," + term.parameter_2.string +")"
 			return True,term
 	if term.object_type=='ufun':
-		status,result=compare_replace(lhs,rhs,term.parameter_1)
+		status,result=substitute(lhs,rhs,term.parameter_1)
 		if (status == True):
 			term.parameter_1=result
 			term.string=term.function_type+"("+result.string+")"
@@ -124,9 +124,9 @@ def evaluate(rules,term):
 		if rule.function_type=='->':
 			left_rule=rule.parameter_1
 			right_rule=rule.parameter_2
-			result=compare_replace(left_rule,right_rule,term)
-			if (result[0]):
-				return evaluate(rules,result[1])
+			status,result=substitute(left_rule,right_rule,term)
+			if (status):
+				return evaluate(rules,result)
 	return term
 
 
