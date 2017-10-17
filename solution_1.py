@@ -33,25 +33,25 @@ def get_middle(string):
 
 
 
-def compare_tree(left_rule,input_rule):
+def match_terms(lhs,term):
 	#print ("Compare ",left_rule.string,input_rule.string)
 	global changes
-	if left_rule.object_type=='ufun' and input_rule.object_type=='ufun':
-		if left_rule.function_type==input_rule.function_type:
-			return compare_tree(left_rule.parameter_1,input_rule.parameter_1)
-	elif left_rule.object_type=='bfun' and input_rule.object_type=='bfun':
-		if left_rule.function_type==input_rule.function_type:
-			if compare_tree(left_rule.parameter_1,input_rule.parameter_1) and compare_tree(left_rule.parameter_2,input_rule.parameter_2):
+	if lhs.object_type=='ufun' and term.object_type=='ufun':
+		if lhs.function_type==term.function_type:
+			return match_terms(lhs.parameter_1,term.parameter_1)
+	elif lhs.object_type=='bfun' and term.object_type=='bfun':
+		if lhs.function_type==term.function_type:
+			if match_terms(lhs.parameter_1,term.parameter_1) and match_terms(lhs.parameter_2,term.parameter_2):
 				return 1
-	elif left_rule.object_type=='con' and input_rule.object_type=='con':
-		if left_rule.string==input_rule.string:
+	elif lhs.object_type=='con' and term.object_type=='con':
+		if lhs.string==term.string:
 			return 1
-	elif left_rule.object_type=='var' and input_rule.object_type!='var':
-		if left_rule.string in changes.keys():
-			if changes[left_rule.string]!=input_rule.string:
+	elif lhs.object_type=='var' and term.object_type!='var':
+		if lhs.string in changes.keys():
+			if changes[lhs.string]!=term.string:
 				return 0
 		else:
-			changes[left_rule.string]=input_rule.string
+			changes[lhs.string]=term.string
 		return 1
 	return 0
 
