@@ -1,7 +1,7 @@
 rules=[]
 constants = ['a','b','c','0']
 variables = ['u','v','x','y','z']
-functions = ['S','+','*']
+functions = ['S','+','*','f']
 
 def parserule(rule):
     hs = rule.split(" -> ")  # lhs and rhs
@@ -54,4 +54,3 @@ def read_rule_file():
 	return
 
 read_rule_file()
-
