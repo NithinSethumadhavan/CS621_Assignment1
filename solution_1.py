@@ -34,7 +34,6 @@ def get_middle(string):
 
 
 def match_terms(lhs,term):
-	#print ("Compare ",left_rule.string,input_rule.string)
 	global substitutions
 	if lhs.object_type=='ufun' and term.object_type=='ufun':
 		if lhs.function_type==term.function_type:
@@ -55,19 +54,19 @@ def match_terms(lhs,term):
 		return 1
 	return 0
 
-def replace(rule):
+def substitute_helper(rule):
 	global substitutions
 	if rule.object_type=='var':
 		if rule.string in substitutions.keys():
 			return Rule(substitutions[rule.string])
 	elif rule.object_type=='ufun':
-		rule.parameter_1=replace(rule.parameter_1)
+		rule.parameter_1=substitute_helper(rule.parameter_1)
 		rule.parameter_2=""
 		rule.string=rule.function_type+"("+rule.parameter_1.string+")"
 		return rule
 	elif rule.object_type=='bfun':
-		rule.parameter_1=replace(rule.parameter_1)
-		rule.parameter_2=replace(rule.parameter_2)
+		rule.parameter_1=substitute_helper(rule.parameter_1)
+		rule.parameter_2=substitute_helper(rule.parameter_2)
 		rule.string=rule.function_type+"("+rule.parameter_1.string+","+rule.parameter_2.string+")"
 		return rule
 	return rule
@@ -75,11 +74,10 @@ def replace(rule):
 
 def substitute(lhs,rhs,term):
 	global substitutions
-	#print ("Compare and replace",left_rule.string,right_rule.string,input_rule.string)
 	substitutions.clear()
 	if match_terms(lhs,term):
 		term = Rule(rhs.string)
-		term = replace(term)
+		term = substitute_helper(term)
 		return True,term
 	if term.object_type=='bfun':
 		status1,result1 = substitute(lhs,rhs,term.parameter_1)
@@ -99,24 +97,6 @@ def substitute(lhs,rhs,term):
 			return True,term
 
 	return False,term
-
-
-# def parse_tree(rules_objects,input_rule):
-# 	flag=True
-# 	while flag:
-# 		flag=False
-# 		for rule in rules_objects:
-# 			if rule.function_type=='->':
-# 				left_rule=rule.parameter_1
-# 				right_rule=rule.parameter_2
-# 				result=compare_replace(left_rule,right_rule,input_rule)
-# 				if (result[0]):
-# 					input_rule=result[1]
-# 					#print(input_rule.string)
-# 					flag=True
-# 	return input_rule
-
-
 
 
 def evaluate(rules,term):
@@ -169,7 +149,7 @@ class Rule:
 			self.object_type='ufun'
 			self.function_type=name
 			if rule[first_par]!='(' or rule[-1]!=')':
-				print ("Error: Misbalance of parameters/parentheses")
+				print ("Invalid Rule: Paranthesis mismatch. Exiting")
 				sys.exit(0)
 			try:
 				self.parameter_1=Rule(rule[first_par+1:-1])
