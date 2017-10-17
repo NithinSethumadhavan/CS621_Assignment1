@@ -1,3 +1,6 @@
+import sys
+from utils import get_middle
+
 variables=['x','y','z','u',]
 constants=['0','a','b','c','d',]
 binary_functions=['+','*',]
