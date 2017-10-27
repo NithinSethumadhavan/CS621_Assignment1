@@ -156,7 +156,8 @@ def part_two_main(rules_objects,rule):
 			solutions=solutions+1
 			for each in values:
 				print ("\t",each,'->',values[each])
-			more=input("Find more solutions?")
+			#more=input("Find more solutions?")
+			more = 'y'
 			if 'y' in more or 'Y' in more or '1' in more:
 				return part_two_main(rules_objects,rule)
 			else:
