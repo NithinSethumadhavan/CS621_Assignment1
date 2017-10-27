@@ -180,22 +180,7 @@ def read_rules():
 		if (each != ""):
 			rule_object=Rule(each)
 			rules_objects.append(rule_object)
-<<<<<<< HEAD
 
-	# input_rule=input("Enter Term: ")
-	# input_rule_object=Rule(input_rule)
-	# result_rule=evaluate(rules_objects,input_rule_object)
-	# print ("Evaluated Solution:",result_rule.string)
-
-
-	input_rule=input("P2: ")
-	input_rule_object=Rule(input_rule)
-	part_two_type_check(input_rule_object)
-	if input_rule_object.function_type=='->':
-		part_two_main(rules_objects,input_rule_object)
-	else:
-		print("Error: Not an equational rule i.e., x->y")
-=======
 	choice = int(input("Enter Part No.:"))
 	if choice == 1:
 		input_rule=input("Enter Term: ")
@@ -212,4 +197,3 @@ def read_rules():
 			print("Wrong Equation. Exiting.")
 	else :
 		print("Wrong Choice. Exiting.")
->>>>>>> 05571a009e0a136d1b3a2ecee853e13239ad3265
