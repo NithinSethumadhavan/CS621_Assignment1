@@ -69,16 +69,19 @@ def substitute(lhs,rhs,term):
 
 
 def evaluate(rules,term):
+	#print("Current Term:",term.string)
 	for rule in rules:
 		if rule.function_type=='->':
 			left_rule=rule.parameter_1
 			right_rule=rule.parameter_2
 			status,result=substitute(left_rule,right_rule,term)
 			if (status):
+				print(rule.string,term.string)
 				return evaluate(rules,result)
 	return term
 
 def read_rules():
+	#file=open("rules_new.txt","r")
 	file=open("rules.txt","r")
 	rules=file.readlines()
 	file.close()
@@ -86,7 +89,7 @@ def read_rules():
 	for each in rules:
 		each=each.replace("\n","")
 		each=each.replace(" ","")
-		if (each):
+		if (each != ""):
 			rule_object=Rule(each)
 			rules_objects.append(rule_object)
 
