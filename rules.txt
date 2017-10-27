@@ -4,3 +4,7 @@
 *(s(x),y) -> +(y,*(x,y))
 fact(0) -> s(0)
 fact(s(x)) -> *(s(x),fact(x))
+app(nl,x)->x
+app(c(x,y),z)->c(x,app(y,z))
+rev(nl)->nl
+rev(c(x,y))->app(rev(y),c(x,nl))
