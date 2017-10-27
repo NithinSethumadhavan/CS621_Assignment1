@@ -1,9 +1,9 @@
 import sys
 
 variables=['x','y','z','u',]
-constants=['0','a','b','c','d',]
-binary_functions=['+','*',]
-unary_functions=['s','fact',]
+constants=['0','a','b','d','nl','1','2','3']
+binary_functions=['+','*','app','c']
+unary_functions=['s','fact','rev']
 
 
 
@@ -37,6 +37,7 @@ class Rule:
 		if(first_par == -1):
 			 first_par = len(rule)
 		name=rule[:first_par]
+		#print("rule:",rule,"name:",name,"loc:",first_par)
 		if '->' in rule:
 			self.object_type='bfun'
 			self.function_type='->'
@@ -51,9 +52,13 @@ class Rule:
 			self.object_type='bfun'
 			self.function_type=name
 			split_index=get_middle(rule[first_par:])
+			#print('bfun:',split_index,rule[first_par:])
+			#print(rule[first_par+1:split_index[0]+first_par-1])
+			#print(rule[split_index[0]+1+first_par-1:split_index[1]+first_par-1])
+
 			try:
-				self.parameter_1=Rule(rule[first_par+1:split_index[0]])
-				self.parameter_2=Rule(rule[split_index[0]+1:split_index[1]])
+				self.parameter_1=Rule(rule[first_par+1:split_index[0]+first_par-1])
+				self.parameter_2=Rule(rule[split_index[0]+1+first_par-1:split_index[1]+first_par-1])
 			except Exception as error:
 				print ("Error in parsing binary function: ",error)
 				sys.exit()
