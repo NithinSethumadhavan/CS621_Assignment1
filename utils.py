@@ -149,8 +149,8 @@ def part_two_main(rules_objects,rule):
 		#print (values)
 		left_rule_object=part_two_substitute_helper(Rule(rule.parameter_1.string))
 		right_rule_object=part_two_substitute_helper(Rule(rule.parameter_2.string))
-		left_rule_object=parse_tree(rules_objects,left_rule_object)
-		right_rule_object=parse_tree(rules_objects,right_rule_object)
+		left_rule_object=evaluate(rules_objects,left_rule_object)
+		right_rule_object=evaluate(rules_objects,right_rule_object)
 		if part_two_match_terms(left_rule_object,right_rule_object):
 			print ("Omg!! Solution Found:")
 			solutions=solutions+1
@@ -180,10 +180,10 @@ def read_rules():
 			rule_object=Rule(each)
 			rules_objects.append(rule_object)
 
-	input_rule=input("Enter Term: ")
-	input_rule_object=Rule(input_rule)
-	result_rule=evaluate(rules_objects,input_rule_object)
-	print ("Evaluated Solution:",result_rule.string)
+	# input_rule=input("Enter Term: ")
+	# input_rule_object=Rule(input_rule)
+	# result_rule=evaluate(rules_objects,input_rule_object)
+	# print ("Evaluated Solution:",result_rule.string)
 
 
 	input_rule=input("P2: ")
