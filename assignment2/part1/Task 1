@@ -1,0 +1,13 @@
+Task 1
+
+Dataset :- Housing Data
+The data provided consists of various features like median income, housing median age, etc.
+Given the above input features, design a Linear Regression machine learning model using Sci-Kit Learn machine learning library to predict the "median house value".
+The data is present in "housing_data.mat" file. The description of the dataset is given in "housing_data_source.txt".
+
+
+The code for extracting the training(training_X and training_Y) and validation(validation_X and validation_Y) data from the housing_data.mat file is provided to you in "task1.py".
+Use the training data to train a model using Linear Regression.
+Using this trained Linear Regression model, predict the labels for the validation set(validaiton_X).
+Using these predicted labels, calculate the error percentage with respect to the true labels provided to you in "validation_Y". Plot a scatterplot graph containing the true label and the predicted label.
+For the scatterplot, the x-axis should represent the data point from the validation set, and y-axis the value for "median house income".
